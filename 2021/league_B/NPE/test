@@ -1,0 +1,27 @@
+def change():
+    print("d")
+
+
+if __name__ == '__main__':
+
+
+    input_won = float (input('원화를 입력하세요: '))
+
+    usa_list=[]
+    uae_list=[]
+    jap_list=[]
+    chi_list=[]
+
+
+    trans_usa = format(input_won/1124.9,'0.2f')
+    trans_uae = format(input_won/1337.63,'0.2f')
+    trans_jap = format(input_won/10.27,'0.2f')
+    trans_chi = format(input_won/171.78,'0.2f')
+
+    change(trans_usa,trans_uae,trans_jap,trans_chi)
+
+    print("달러의 최소한 화폐 수는"++ "입니다.  ")
+    print("유로의 최소한 화폐 수는 "+ + "입니다.  ")
+    print("엔의 최소한 화폐 수는 "+ + "입니다.  ")
+    print("위안의 최소한 화폐 수는 "+ + "입니다.  ")
+    print()

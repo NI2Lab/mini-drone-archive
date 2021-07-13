@@ -1,0 +1,130 @@
+# 대회운영방식: 워크숍(교육), 예선(중간평가), 본선
+1. 워크숍(교육): 대회 참여를 위한 기본기술 교육진행
+2. 예선(중간평가): 워크샵 참여율, 과제 및 코딩테스트를 통해 중간평가(리그A 최대 12팀, 리그B 최대 8팀 본선 참가)
+3. 본선(비대면): 전체 워크숍을 성실히 수행한 최종 본선 진출팀, 대회 당일 본선 미션 수행, 결과에 따라 수상 선발
+ㄴ 본선미션내용: 정해진 경로 또는 당일 일부 수정된 경로를 따라 목적지로 이동
+ㄴ 실시간 스트리밍을 통해 해당팀의 코드를 실행시켜 드론이 동작하는 모습을 스트리밍
+ㄴ 스트리밍 비행결과를 보고 코드를 수정하거나 그대로 유지하거나 동작시킬 수 있었음
+ㄴ 드론비행경로는 초록색 네모로 구성된 트랙
+
+====================================================================================
+# Git 설치
+1. https://git-scm.com/downloads
+2. Windows
+3. 64-bit for Windows Setup
+4. Next 연타
+
+# Git Bash
+1. Interface 의미:
+User@ComputerName Compiler Path ~
+$ 입력대기
+
+2. Directory 생성:
+User@ComputerName Compiler Path ~
+$ mkdir <folder_name>
+
+3. Directory 이동:
+User@ComputerName Compiler Path ~
+$ cd <folder_name>
+
+4. Git 선언:
+User@ComputerName Compiler Path ~
+$ git init
+
+5. Git 계정연결:
+User@ComputerName Compiler Path ~
+$ git config --global user.name "UserID"
+$ git config --global user.email "UserEmail"
+
+6. Git 파일 업로드:
+User@ComputerName Compiler Path ~
+$ git add ./				# 모든파일 업로드
+$ git add filename				# 특정파일 업로드
+$ git commit -m "Commit Message"
+
+7. Git Repository 생성:
+ㄴ Github 홈페이지 이동 - Repository 생성 - Private로 생성
+
+8. Git Repository 동기화:
+User@ComputerName Compiler Path ~
+$ git remote add origin <URL>
+$ git push -u				# Push 방법1(방법1과 방법2는 동일한 결과)
+$ git push origin master			# Push 방법2(방법1과 방법2는 동일한 결과)
+
+9. Git Collaborator 초대:
+ㄴ Github Repository URL 이동
+ㄴ Settings - Manage access - Invite a collaborator
+
+# Git Clone:
+User@ComputerName Compiler Path ~
+$ git clone <URL> <Folder_Name>		# <Folder_Name>폴더 생성 후 해당 폴더 안에 Clone
+
+# Git Clone 후 수정/갱신 과정:
+User@ComputerName Compiler Path ~
+$ git add ./				# push하고자 하는 파일 추적
+$ git status				# push하고자 하는 파일 상태
+$ git commit -m "Commit Message"		# 변경이력 저장
+$ git push				# 파일 업로드
+
+# Git 공동개발 업데이트:
+User@ComputerName Compiler Path ~
+$ git pull
+
+====================================================================================
+# Git Branch
+1. 공동개발환경
+2. 독립적 수행 -> 다른 Branch의 영향없음
+3. Merge를 통해 하나의 Branch로 병합
+4. 작업속도향상, 작업충돌회피
+5. 문제 발생 시, 원인을 찾기 쉽고, 비교적 해결 용이
+
+# Git Branch 종류
+1. 통합브랜치: Master Branch
+ㄴ 언제든지 동작 가능한 코드가 작성된 브랜치, 늘 안정적인 상태 유지 중요
+ㄴ 처음 만든 저장소에 master라는 이름의 브랜치 생성
+ㄴ 일반적으로 master 브랜치를 통합브랜치로 사용
+2. 토픽브랜치: Topic Branch
+ㄴ 기능추가 및 버그수정 같은 단위작업을 위한 브랜치
+ㄴ 통합브랜치로부터 생성하여, 특정작업 완료 후 다시 통합브랜치에 병합
+
+# Git Branch 전환:
+$ checkout <Branch_Name>
+
+# Git Branch 병합: Github에 접속, Pull Request를 통해 Merge 가능
+$ merge <Branch_Name>
+
+# Git Branch 사용법:
+$ git branch			# Branch 목록확인: 로컬
+$ git branch -a			# Branch 목록확인: 로컬 및 원격 저장소
+$ git branch <Branch_Name>	# Branch 생성: 이름이 <Branch_Name>인 Branch를 생성
+$ git checkout <Branch_Name>	# Branch 전환: 이름이 <Branch_Name>인 Branch로 전환
+$ git checkout -b <Branch_Name>	# Branch 전환: 이름이 <Branch_Name>인 Branch를 생성 후 전환
+$ git push origin <Branch_Name>	# 원격저장소에 <Branch_Name> 생성 후 push
+				# 생성된 Branch는 로컬에만 존재하므로, 원격저장소에 생성해주는 것임
+
+# GIt Pull Request
+1. Compare & Pull Request:
+ㄴ Github Repository 홈페이지 이동 - Pull requests - Compare & pull request
+ㄴ 어떤 Branch에서 어떤 Branch로 병합할 것인지 설정가능
+ㄴ Reviewer 선택하여 점검을 요청 - Create pull request
+
+2. Reviewer:
+ㄴ Github Repository 홈페이지 이동 - Pull requests
+ㄴ Conversation, Commits, Files changed 확인
+ㄴ Github Repository 홈페이지 이동 - Pull requests - Add your review - Files changed로 이동됨
+ㄴ 바뀐내용 확인 - Review changes - 리뷰등록
+ㄴ '어떤 점들에 대해서 어떤 결과들이 있다' 라고 작성
+ㄴ Comment(승인없이 comment만 작성), Approve(Pull Request 승인), Request changes(Merge 전 추가 변경사항 요청) 선택
+ㄴ Submit review
+
+3. Requester
+ㄴ Review 내용 확인
+ㄴ 이상이 없으면 Merge pull request 클릭
+
+====================================================================================
+# 1차 과제
+1. 개인용 & 팀용 Github Repository 생성
+2. Git token 발급받아 대회사이트에 업로드
+3. 팀원별 Branch 생성 후 같은 파일 편집 후 Pull Request
+4. 팀장은 각 Pull Request 코드 리뷰 후 Master로 Branch Merge
+

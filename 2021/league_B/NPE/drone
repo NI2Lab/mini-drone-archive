@@ -1,0 +1,114 @@
+#최소한의 화폐로 환전했을때 몇장(개)의 화폐가 필요한지 출력하는 프로그램을 작성
+
+class change_class:
+    def change(slef ,usa, eu, jap, chi):
+
+        dollar = 0
+        cent = 0
+        euro = 0
+        yen =0
+        renminbi = 0
+
+        usa_kind = [100, 50, 20, 10, 5, 1, 0.5, 0.25, 0.1, 0.05, 0.01]
+        usa_re = list()
+
+        print('환전된 달러',format(usa, '0.2f'),'달러')
+
+        for i in usa_kind:
+            usa_re.append(usa // i)
+            usa = usa % i
+
+        for i in range(len(usa_kind)):
+            if i<6 and usa_re[i] != 0:
+                print(int(usa_kind[i]),'달러',int(usa_re[i]),'개',end='  ')
+            elif i>=6 and usa_re[i] != 0:
+                print(int(usa_kind[i]*100),'센트',int(usa_re[i]),'개',end= '  ')
+
+        print()
+        print('달러의 최소 개수 : ', sum(usa_re))
+        print()
+
+        eu_kind = [500, 200, 100, 50, 20, 10, 5, 2, 1, 0.5, 0.2, 0.1, 0.05, 0.02, 0.01]
+        eu_re = list()
+
+        print('환전된 유로', format(eu, '0.2f'), '유로')
+
+        for i in eu_kind:
+            eu_re.append(eu // i)
+            eu = eu % i
+
+        for i in range(len(eu_kind)):
+            if i < 9 and eu_re[i] != 0:
+                print(int(eu_kind[i]), '유로', int(eu_re[i]), '개', end='  ')
+            elif i >= 9 and eu_re[i] != 0:
+                print(int(eu_kind[i] * 100), '유로센트', int(eu_re[i]), '개', end='  ')
+
+        print()
+        print('유로의 최소 개수 : ', sum(eu_re))
+        print()
+
+        jap_kind = [10000, 5000, 2000, 1000, 500, 100, 50, 10, 5, 1]
+        jap_re = list()
+
+        print('환전된 엔화', format(jap, '0.2f'), '엔화')
+
+        for i in jap_kind:
+            jap_re.append(jap // i)
+            jap = jap % i
+
+        for i in range(len(jap_kind)):
+            if jap_re[i] != 0:
+                print(int(jap_kind[i]), '엔화', int(jap_re[i]), '개', end='  ')
+        print()
+        print('엔화의 최소 개수 : ', sum(jap_re))
+        print()
+
+        chi_kind = [100, 50, 20, 10, 5, 1, 0.5, 0.1]
+        chi_re = list()
+
+        print('환전된 위안', format(chi, '0.2f'), '위안')
+
+        for i in chi_kind:
+            chi_re.append(chi // i)
+            chi = chi % i
+
+        for i in range(len(chi_kind)):
+            if i < 6 and chi_re[i] != 0:
+                print(int(chi_kind[i]), '위안', int(chi_re[i]), '개', end='  ')
+            elif i >= 6 and chi_re[i] != 0:
+                print(int(chi_kind[i] * 100), '자오', int(chi_re[i]), '개', end='  ')
+
+        print()
+        print('위안의 최소 개수 : ',sum(chi_re))
+
+
+
+
+
+
+
+
+
+if __name__ == '__main__':
+
+    T = change_class()
+
+    input_won = float (input('원화를 입력하세요: '))
+
+    trans_usa = float(input_won / 1124.9)
+    trans_uae = float(input_won/1337.63)
+    trans_jap = float(input_won/10.27)
+    trans_chi = float(input_won/171.78)
+
+    T.change(trans_usa,trans_uae,trans_jap,trans_chi)
+
+
+
+
+
+
+
+
+
+
+

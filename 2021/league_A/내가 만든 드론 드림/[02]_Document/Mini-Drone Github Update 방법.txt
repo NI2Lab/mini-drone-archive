@@ -1,0 +1,19 @@
+https://github.com/mini-drone-niil/2020-mini-drone
+
+# 항상 해야하는 작업
+git checkout KimAreum
+수정작업 후
+git add .
+git commit -m "메세지"
+git push origin KimAreum
+리퀘스트 요청
+
+# main을 자신의 브랜치로 최신화
+git checkout main
+git pull
+git checkout KimAreum
+git merge main
+git add .
+git commit -m "메세지"
+git push
+ 

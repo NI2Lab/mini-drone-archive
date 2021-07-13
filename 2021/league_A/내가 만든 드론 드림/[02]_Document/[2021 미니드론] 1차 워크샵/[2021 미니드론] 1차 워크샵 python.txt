@@ -1,0 +1,9 @@
+# Python 설치
+1. https://python.org
+2. Downloads - Windows - Python 3.7.6 - Windowsx86-64 executable installer 설치
+ㄴ 안정화된 최신버전
+ㄴ 설치 시 '!반드시!' Add Python 3.7 to PATH 체크할 것
+
+# Pycharm 설치
+1. https://www.jetbrains.com/ko-kr/pycharm/download/#section=windows
+2. Community 다운로드
