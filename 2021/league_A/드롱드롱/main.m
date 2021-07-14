@@ -6,17 +6,16 @@ takeoff(drone);
 moveup(drone,'distance',0.3,'speed',1.0);
 level = 1;
 format long
-fprintf("level %d : start\n",level)
 x_rc = 480;
-
 %% (1) Initial Setting
 while 1
+    B = 1;
     if level == 1
         L = 0.78;
-        y_rc = 220;
+        y_rc = 210;
         r = [11.708523799059606;-0.072422126629259;2.062822408761772e-04;-2.524281451187693e-07;4.621395418467465e-11;9.564242384859517e-14];
         add = 0.4;
-        meter = 1.8;
+        meter = 1.7;
     elseif level == 2
         L = 0.57;
         y_rc = 190;
@@ -40,31 +39,26 @@ while 1
     end
 %% (2) Control to Centroid and Move Forward   
     while 1
-        % (1) snapshot & Centroid
         blue = find_color(cam,800,0.55,0.7,0.4);
         BWa = ~blue;
         BWa = bwareaopen(BWa,500);
         subplot(2,1,2), imshow(BWa)
         Diameter = [];
         try
-            [Diameter,Centroid] = diameter_chase(BWa,120,500);
+            [Diameter,Centroid] = diameter_chase(BWa,120,550);
         catch
         end
         if isempty(Diameter) == 1
             try
-                Boundary = [];
                 [Boundary,Point] = line_chase(blue,800);
             catch
+                B = 0;
+                break
             end
                 Centroid(1) = Point(1);
                 Centroid(2) = Point(2);
                 Diameter = 0;
-                %plot
-            hold on
-            plot(Centroid(1),Centroid(2),'b*')
-            hold off
         end
-        % (2) distance
         x_mc = Centroid(1);
         y_mc = Centroid(2);
         if Diameter == 0
@@ -80,7 +74,6 @@ while 1
             else
                 move_d_y = 0.2;
             end
-            fprintf(" Move_Distance = (%f,%f)\n",move_d_x,move_d_y)
         else
             if Diameter < 200
                 m_Diameter = 200;
@@ -99,19 +92,14 @@ while 1
             else
                 move_d_y = round(abs(d_y),1);
             end
-            fprintf(" Move_Distance = (%f, %f)\n",move_d_x,move_d_y)
         end
-        
-        % (3) Direction
         x = sign(d_x);
         y = sign(d_y);
         if move_d_x > 0.1
             if x == 1
                 moveright(drone,'distance',move_d_x,'speed',0.6)
-                disp("moveright")
             elseif x == -1
                 moveleft(drone,'distance',move_d_x,'speed',0.6)
-                disp("moveleft")
             end
         else
             x = 0;
@@ -119,45 +107,42 @@ while 1
         if move_d_y > 0.1
             if y == 1
                 movedown(drone,'distance',move_d_y,'speed',0.6)
-                disp("movedown")
             elseif y == -1
                 moveup(drone,'distance',move_d_y,'speed',0.6)
-                disp("moveup")
             end
         else
             y = 0;
         end
-        %(4) Decision
         if (x == 0) && (y == 0)
-            memory = blue;
             distance = r(1)+r(2).*Diameter+r(3).*Diameter.^2+r(4).*Diameter.^3+r(5).*Diameter.^4+r(6).*Diameter.^5;
              move_d_forward = round(distance,1);
             if move_d_forward > meter
                     move_d_forward = move_d_forward - meter;
                 if (move_d_forward < 0.3)
-                    move_d_forward = move_d_forward + meter +d add;
-                    fprintf(" Distance(meter) = %f\n Move_Distance(meter) = %f\n",distance,move_d_forward)
+                    move_d_forward = move_d_forward + meter +add;
                     moveforward(drone,'distance',move_d_forward,'speed',1.0);
                     break
                 else
-                    fprintf(" Distance(meter) = %f\n Move_Distance(meter) = %f\n",distance,move_d_forward)
                     moveforward(drone,'distance',move_d_forward,'speed',1.0);
                 end
             else
                 move_d_forward = move_d_forward + add;
-                fprintf(" Diameter(pixel) = %f\n Distance(meter) = %f\n Move_Distance(meter) = %f\n",Diameter,distance,move_d_forward)
                 moveforward(drone,'distance',move_d_forward,'speed',1.0);
                 break
             end
          end
     end
 %% (3) Check Color Point
-k = 0;
+    k = 0;
     while 1
+        if B == 0
+            moveup(drone,'distance',0.3,'speed',1.0);
+            break
+        end
         if (level == 1)||(level ==2)
             red = find_color(cam,10,0.001,0.05,0.4);
                 th_red = numel(find(red));
-                if k == 3
+                if k == 2
                     th_red = 3000;
                 end
             if (th_red < 2000)
@@ -167,22 +152,19 @@ k = 0;
                 turn(drone,deg2rad(-90));
                 moveforward(drone,'distance',1.2,'speed',1.0);
                 level = level + 1;
-                fprintf("level %d : finish\nlevel %d : start\n",level-1,level)
                 break
             end
         else
             purple = find_color(cam,10,0.65,0.8,0.2);
             th_pp = numel(find(purple));
-            if k == 3
+            if k == 2
                 th_pp = 3000;
             end
-            if th_pp < 2500
+            if th_pp < 2000
                 moveforward(drone,'distance',0.2,'speed',0.6)
                 k = k + 1;
             else
-                fprintf("level %d : finish\n",level)
                 level = 4;
-                pause(1);
                 land(drone);
                 break
             end
@@ -242,13 +224,6 @@ function [Diameter,Centroid] = diameter_chase(BWa,remove,max)
         Diameter = [];
         Centroid = [];
     end
-    pro = major(num)/minor(num);
-    disp(pro)
-%plot
-    hold on
-    viscircles(Centroid,Diameter/2,'color','b');
-    plot(Centroid(1),Centroid(2),'b*')
-    hold off
 end
 
 function [Boundary,Point] = line_chase(BWa,remove)
@@ -277,14 +252,10 @@ function [Boundary,Point] = line_chase(BWa,remove)
     center_x = mean(M2(:,2));
     center_y = mean(M2(:,1));
     Point = [center_x,center_y];
-    hold on
-    visboundaries(Boundary)
-    hold off
 end
 
 function color = find_color(cam,remove,min,max,s_value)
     snap = snapshot(cam);
-    subplot(2,1,1), imshow(snap)
     hsv = rgb2hsv(snap);
     h = hsv(:,:,1); 
     s = hsv(:,:,2); 
@@ -300,5 +271,4 @@ function color = find_color(cam,remove,min,max,s_value)
         color = bwareaopen(color,remove);
     catch
     end
-    subplot(2,1,2),imshow(color)
 end

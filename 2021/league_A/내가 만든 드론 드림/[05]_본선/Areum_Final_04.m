@@ -3,12 +3,14 @@ clear()
 thdown_green = [0.25, 40/240, 80/240];
 thup_green = [0.40, 240/240, 240/240];
 % HSV Threshold Blue
-thdown_blue = [0.5, 0.35, 0.25];        % 파란색 점의 임계값 범위
+thdown_blue = [0.5, 0.35, 0.25];        % 파란색의 임계값 범위
 thup_blue = [0.75, 1, 1];               
-thdown_red = [0.0, 40/240, 65/240];     % 빨간색 점의 임계값 범위
-thup_red = [0.0, 240/240, 240/240];
-thdown_purple = [0.25, 35/240, 45/240]; % 보라색 점의 임계값 범위
-thup_purple = [0.3, 240/240, 240/240];
+thdown_red1 = [0, 0.5, 0.5];
+thup_red1 = [0.025, 1, 1];
+thdown_red2 = [0.975, 0.5, 0.5];
+thup_red2 = [1, 1, 1];
+thdown_purple = [0.725, 0.25, 0.25];
+thup_purple = [0.85, 1, 1];
 
 droneObj = ryze();
 cameraObj = camera(droneObj);
@@ -50,7 +52,7 @@ while 1
     
     if(find_cir == 1)
         disp('find_cir = 1');
-%         try
+        try
             bw2 = imfill(bw1,'holes');    % 구멍을 채움
             %구멍을 채우기 전과 후를 비교하여 값이 일정하면 0, 변했으면 1로 변환 (0->검은색 1->하얀색)
             for row = 1:rows
@@ -96,7 +98,7 @@ while 1
 
                 dif_x = camera_mid_col - center_col
                 dif_y = camera_mid_row - center_row
-                go = 0;
+%                 go = 0;
 
                 if((dif_x <= -50 || dif_x >= 50) || (dif_y <= -50 || dif_y >= 50))
                     disp('중심 맞추기');
@@ -128,45 +130,56 @@ while 1
                         moveup(droneObj, 'distance', 0.25)
                     end
                 else
-                    go = 1;
+                    cnt = 0;
+                    while(1)
+                        cnt = cnt + 1;
+                        frame = snapshot(cameraObj);
+                        src_hsv = rgb2hsv(frame);
+                        src_h = src_hsv(:,:,1);
+                        src_s = src_hsv(:,:,2);
+                        src_v = src_hsv(:,:,3);
+                        [rows, cols, channels] = size(src_hsv);
+
+                        bw_red = (thdown_red1(1) < src_h)&(src_h < thup_red1(1)) & (thdown_red1(2) < src_s)&(src_s < thup_red1(2)) & (thdown_red1(3) < src_v)&(src_v < thup_red1(3)) ...
+                            | (thdown_red2(1) < src_h)&(src_h < thup_red2(1)) & (thdown_red2(2) < src_s)&(src_s < thup_red2(2)) & (thdown_red2(3) < src_v)&(src_v < thup_red2(3)); 
+                        bw_purple = (thdown_purple(1) < src_h)&(src_h < thup_purple(1)) & (thdown_purple(2) < src_s)&(src_s < thup_purple(2)) & (thdown_purple(3) < src_v)&(src_v < thup_purple(3));
+
+                        subplot(1, 3, 1), imshow(frame);
+                        subplot(1, 3, 2), imshow(bw_red);
+                        subplot(1, 3, 3), imshow(bw_purple);
+
+                        if(sum(bw_red, 'all') > 8000)
+                            turn(droneObj, deg2rad(-90));
+                    %         moveforward(droneObj, 'distance', 0.7);
+                            land(droneObj)
+                            break;
+                        elseif(sum(bw_purple, 'all') > 8000)
+                            land(droneObj);
+                            return;
+                        else
+                            moveforward(droneObj, 'distance', 0.4);
+                        end
+                        
+                        if (cnt > 4)
+                           break; 
+                        end
+                    end
                 end
 
-                if go == 1
-                    movedown(droneObj, 'distance', 0.4)
-                    moveforward(droneObj, 'distance', 2)
-                    land(droneObj)
-                    break
-                end
+                
 
-    %             disp('앞으로 전진');
-    %             if(cnt_red <= 20 || cnt_purple <= 20)       % 해당 픽셀 수가 특정 값일 때 앞으로 이동 (값 정확 X)
-    %                 moveforward(droneObj, 'distance', 1)
-    %             elseif(cnt_red <= 40 || cnt_purple <= 40)
-    %                 moveforward(droneObj, 'distance', 0.5)
-    %             end
-
-    %             if isequal(isRed, 1)    % 표식이 빨간색이라면 90도 좌회전
-    %                 turn(droneObj, deg2rad(-90))
-    %             elseif isequal(isPurple, 1)     % 표식이 보라색이라면 착륙
-    %                 land(droneObj)
-    %                 break;
-    %             end
-
-
-    %%% 이미지 출력
+                %%% 이미지 출력
                 subplot(2, 2, 1), imshow(frame); hold on;
                 plot(center_col, center_row, 'r*'); hold off;
                 subplot(2, 2, 3), imshow(bw1); hold on;
                 plot(center_col, center_row, 'r*'); hold off;
                 subplot(2, 2, 4), imshow(bw2); hold on;
                 plot(center_col, center_row, 'r*'); hold off;
-    %             imshow(bw1);
-    %             imshow(bw2);
             end
 
-%         catch exception
-%             disp('error');
+        catch exception
+            disp('error');
         end
-%     end
+    end
     
 end

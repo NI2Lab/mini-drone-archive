@@ -1,4 +1,4 @@
-# B 리그_범 올라온다
+# :tiger: B 리그_범 올라온다
 KIEE 2021 Mini Drone Flight Competition B_League Bumup  
 2021 미니드론 B리그 범올라온다 입니다
 
@@ -19,10 +19,10 @@ KIEE 2021 Mini Drone Flight Competition B_League Bumup
      > 드론 카메라의 화면 중점과 화면 안에서 검출된 파란색 링의 픽셀들 중점을 비교
  1. 상승 & 하강 제어 \
     ![상하](https://1.bp.blogspot.com/-1Eo_hVjjndA/YOfqAbu7W6I/AAAAAAAAACI/40jUd1XetfQeUTMNQ8u-SoAodLHzSutkACLcBGAsYHQ/w732-h298/%25EC%2583%2581%25ED%2595%2598.jpg)
- 1. 좌 이동 & 우 이동 제어\
+ 1. 좌 & 우 이동 제어\
     ![좌우](https://1.bp.blogspot.com/-uxoMlI81qmE/YOfqASY_C6I/AAAAAAAAACE/xNqdFpkVSuIdSW_1BumhjbCJf4s--4DwACLcBGAsYHQ/w737-h300/%25EC%25A2%258C%25EC%259A%25B0.jpg)
  * **빨간색 / 보라색 색상 검출**
-    > 인식된 빨간색 표식의 픽셀에 따라 링의 거리 추정  
+    > 인식된 빨간색 표식의 픽셀 수에 따라 링의 거리 추정  
       ![링거리](https://lh3.googleusercontent.com/-NxNQWg7fGx4/YOfEdIFLnDI/AAAAAAAAAB0/YXxvg2rDA0II3rLnqSUkZmq9gybzF6l3ACLcBGAsYHQ/w456-h234/rr.jpg)
  1. 빨간색 HSV 설정
     > 빨간색 표식을 인식하면 회전  
@@ -35,7 +35,7 @@ KIEE 2021 Mini Drone Flight Competition B_League Bumup
  <!-------------------------------------------------------------Part 2------------------------------------------------------------------------------------------>
  ## 알고리즘 설명
  <center>
-     <img src="https://1.bp.blogspot.com/-gbQroe1XfUw/YO1EjA7SOGI/AAAAAAAAAC0/gPyo2bObkHQD39ApluaC59n7I50qPCeMQCLcBGAsYHQ/w1639-h922/1234.png">
+     <img src="https://1.bp.blogspot.com/-B_Op5WMY530/YO492SI13jI/AAAAAAAAADU/5n2Yke5EYTEMR-z4itDKXyFYuEDTmLljwCLcBGAsYHQ/w885-h498/KakaoTalk_20210714_102416927.png">
  </center>
 
  1. 드론 연결 및 이륙
@@ -43,30 +43,30 @@ KIEE 2021 Mini Drone Flight Competition B_League Bumup
  2. 영상수신
      > for frame in camera.capture_continuous(rawCapture, format="bgr", use_video_port=True):  
        실시간 영상을 수신한다.
- 3. 전처리
-     > 입력영상에서 원하는 색상만을 사용하기 위한 과정 파란색의 통과할 링,  
-       1,2차의 빨간색 표식 그리고 3차의 보라색 표식의 HSV값을 미리 저장한 후,  
-       원본영상을 HSV 색영상으로 변환, 이진화하여 필요한 색상만을 찾는다.
+ 3. 전처리  
+     > 입력영상에서 원하는 색상만을 사용하기 위한 과정.    
+       파란색의 링, 1, 2차의 빨간색 표식 그리고 3차의 보라색 표식의 HSV 값을 미리 저장한 후,  
+       원본영상을 HSV 색영상으로 변환, 이진화하여 필요한 색상만을 찾는다.  
 
- 4. 링 위치 파악
-      > 링과 드론의 거리가 1미터 보다 가깝다면 빨간 표식을 중점으로 계산하고, 1미터 보다 멀다면 링의 중점을 찾도록 한다.
+ 4. 링 중점 좌표 계산  
+      > 드론이 링을 통과할 수 있도록 입력영상에서 링의 중점 좌표를 찾는다. 
 
- 5. 링 중점 좌표 계산  
-      > 링이 1미터 보다 멀다면 드론이 링을 통과할 수 있도록 입력영상에서 링의 중점 좌표를 찾는다. 
-
- 6. 드론 위치 제어  
-      > 앞서 찾은 링의 중점좌표로 드론의 현재 위치를 판단하고 링의 중앙에 드론이 위치하고록 제어한다.  
-        중앙에 위치되면 직진한다.
-
- 7. 직진 후, 표식 확인  
-      > 드론이 직진한 후에 입력영상에서 표식색상의 픽셀개수를 통해 표식을 확인한다.\
-        찾지 못하면 상하,전후진 이동을 통해 표식을 탐색한다. 
-
+ 5. 드론 위치 제어  
+      > 앞서 찾은 링의 중점좌표로 드론의 현재 위치를 판단하고     
+        링의 중앙에 드론이 위치하도록 좌우상하를 제어한다.  
+        
+ 6. 직진 및 표식 확인  
+       > 드론의 위치가 링의 중앙에 위치한다고 판단되면 표식을 인식할 수 있도록 직진한다.  
+ 
+ 7. 표식과의 거리 판단  
+      > 입력영상에서 표식색상의 픽셀개수를 통해 표식과 드론간의 거리를 판단한다.  
+        링 통과 전 표식의 중점을 재탐색하고 그 중점을 기준으로 드론의 좌우상하를 제어한 후, 직진하여 링을 통과한다.      
+        
+   
  8. 회전 및 착륙  
-      > 빨간 표식이 확인되면 드론을 회전시키고 보라색 표식이 확인되면 드론을 착륙시킨다.  
+      > 링 통과 후, 빨간 표식이 확인되면 드론을 회전시키고 보라색 표식이 확인되면 드론을 착륙시킨다.  
 
  ---
-
  <!-------------------------------------------------------------Part 3------------------------------------------------------------------------------------------>
  ## 소스코드 설명
 
