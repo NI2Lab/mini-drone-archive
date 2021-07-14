@@ -1,0 +1,4 @@
+e-drone==21.1.6
+numpy==1.16.2
+opencv==3.2.0
+picamera==1.13

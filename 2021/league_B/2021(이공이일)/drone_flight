@@ -1,0 +1,20 @@
+from time import sleep
+from e_drone.drone import *
+from e_drone.protocol import *
+
+drone = Drone()
+
+def up(self):
+    drone.sendControlPosition16(0, 0, 0.25, 5, 0, 0)
+def down(self):
+    drone.sendControlPosition16(0, 0, -0.25, 5, 0, 0)
+def front(self):
+    drone.sendControlPosition16(0.25, 0, 0, 5, 0, 0)
+def back(self):
+    drone.sendControlPosition16(-0.25, 0, 0, 5, 0, 0)
+def left(self):
+    drone.sendControlPosition16(0, 0.25, 0, 5, 0, 0)
+def right(self):
+    drone.sendControlPosition16(0, -0.25, 0, 5, 0, 0)
+
+#left, right 확인 필요

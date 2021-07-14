@@ -23,8 +23,8 @@ while 1
         add = 0.4;
         meter = 1.3;
         H = readHeight(drone);
-        if H < 1.0
-            moveup(drone,'distance', 1.2 - H,'speed',0.6);
+        if H < 1.4
+            moveup(drone,'distance', 1.6 - H,'speed',1.0);
         end
     else
         L = 0.5;
@@ -33,9 +33,9 @@ while 1
         add = 0.4;
         meter = 1.4;
          H = readHeight(drone);
-        if H < 1.0
-            moveup(drone,'distance', 1.2 - H,'speed',0.6);
-        end        
+        if H < 2.0
+            movedown(drone,'distance', 2.4 - H,'speed',1.0);
+        end
     end
 %% (2) Control to Centroid and Move Forward   
     while 1
@@ -119,7 +119,7 @@ while 1
             if move_d_forward > meter
                     move_d_forward = move_d_forward - meter;
                 if (move_d_forward < 0.3)
-                    move_d_forward = move_d_forward + meter +add;
+                    move_d_forward = move_d_forward + meter + add;
                     moveforward(drone,'distance',move_d_forward,'speed',1.0);
                     break
                 else
@@ -140,7 +140,7 @@ while 1
             break
         end
         if (level == 1)||(level ==2)
-            red = find_color(cam,10,0.001,0.05,0.4);
+            red = find_color(cam,50,0.001,0.05,0.8);
                 th_red = numel(find(red));
                 if k == 2
                     th_red = 3000;
@@ -155,12 +155,12 @@ while 1
                 break
             end
         else
-            purple = find_color(cam,10,0.65,0.8,0.2);
+            purple = find_color(cam,10,0.725,0.825,0.3);
             th_pp = numel(find(purple));
             if k == 2
                 th_pp = 3000;
             end
-            if th_pp < 2000
+            if th_pp < 1500
                 moveforward(drone,'distance',0.2,'speed',0.6)
                 k = k + 1;
             else
