@@ -9,28 +9,28 @@ KIEE 2020 Mini Drone Flight Competition B_League Karihage_Team
 1. 초록색 HSV 설정
 1. 초록색 HSV 인식  
     > 컬러 RGB 영상을 HSV로 변환후 설정된 HSV값에 의해 이진화된 이미지 출력
-![까리하게](/README_image/threshold.png)
+![까리하게](/2020/league_B/README_image/threshold.png)
 1. 인식된 초록색 픽셀들의 중점 찾기   
     > cv2.connectedComponentsWithStats 함수를 사용하여 중점을 찾음
-![까리하게](/README_image/greedetect_Total.PNG)
+![까리하게](/2020/league_B/README_image/greedetect_Total.PNG)
 
 * **드론 이동**
 > 드론 카메라의 화면 중점과 화면 안에서 검출된 초록색 링의 픽셀들 중점을 비교
 1. 상승 & 하강 제어 
- ![까리하게](/README_image/up&down.PNG)  
+ ![까리하게](/2020/league_B/README_image/up&down.PNG)  
 1. 좌 이동 & 우 이동 제어
- ![까리하게](/README_image/left&right.PNG)
+ ![까리하게](/2020/league_B/README_image/left&right.PNG)
 * **빨간색 / 파란색 색상 검출**
 1. 빨간색 HSV 설정
    > 인식된 빨간색 픽셀의 총량 > 800 보다 클 경우 동작  
-    ![까리하게](/README_image/red_pixel2.PNG)
+    ![까리하게](/2020/league_B/README_image/red_pixel2.PNG)
 1. 파란색 HSV 설정
    > 인식된 파란색 픽셀의 총량 > 600 보다 클경우 동작   
-    ![까리하게](/README_image/blue_pixel2.PNG)
+    ![까리하게](/2020/league_B/README_image/blue_pixel2.PNG)
 
 
 ## 알고리즘 설명
-![까리하게](/README_image/flowchart.JPG)  
+![까리하게](/2020/league_B/README_image/flowchart.JPG)  
 1. 드론 연결 및 이륙
 2. 영상수신
 3. 전처리
