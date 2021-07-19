@@ -1,0 +1,18 @@
+droneObj = ryze();
+
+takeoff(droneObj);
+pause(2);
+
+moveforward(droneObj, 'distance', 0.5);
+pause(2);
+
+moveright(droneObj, 'distance', 0.4);
+pause(2);
+
+turn(droneObj, deg2rad(230));
+pause(2);
+
+moveforward(droneObj, 'distance', 0.707);
+pause(2);
+
+land(droneObj);

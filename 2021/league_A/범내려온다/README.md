@@ -1,7 +1,7 @@
 # 2021 미니드론 자율주행 경진대회 A리그 범내려온다팀!:tiger:
 ## 대회 진행 전략
-![전략](https://github.com/yoonbeomjun/Aleague_bumdown/blob/master/readme/1.PNG?raw=true)
-![전략](https://github.com/yoonbeomjun/Aleague_bumdown/blob/master/readme/2.PNG?raw=true)
+![전략](/2021/league_A/범내려온다/readme/1.PNG)
+![전략](/2021/league_A/범내려온다/readme/2.PNG)
 
 ### 
 - **1. 링 구멍의 중심을 찾는 전략** :  카메라를 캡쳐하여 링을 이진화시킵니다. 이진화 영상에서 imfill함수를 사용하여 구멍을 채웁니다. 구멍을 채운 영상에서 이진화 영상을 빼서 구멍만을 추출합니다. 구멍의 중심을 찾아 Throttle제어와 Roll제어를 하여 드론과 구멍의 중심이 일치하게 제어합니다.
@@ -15,8 +15,8 @@
 ---
 <br></br>
 ## 알고리즘 설명
-![알고리즘도](https://github.com/yoonbeomjun/Aleague_bumdown/blob/master/readme/1%EB%8B%A8%EA%B3%84.PNG?raw=true)
-![알고리즘도](https://github.com/yoonbeomjun/Aleague_bumdown/blob/master/readme/2,3%EB%8B%A8%EA%B3%84.PNG?raw=true)
+![알고리즘도](/2021/league_A/범내려온다/readme/1단계.PNG)
+![알고리즘도](/2021/league_A/범내려온다/readme/2,3단계.PNG)
 
 
 - **1단계**  

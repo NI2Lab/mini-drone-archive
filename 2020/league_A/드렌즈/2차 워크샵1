@@ -1,0 +1,165 @@
+	단순 이륙 & 착륙
+
+%드론 객체 선언
+droneObj = ryze();
+
+%이륙
+takeoff(droneObj);
+pause(3);
+
+%착륙
+land(droneObj);
+
+-----------------------------------------------------
+이동 지속시간 이용한 방향 제어(오른쪽)
+
+%드론 객체 선언
+droneObj = ryze();
+
+%이륙
+takeoff(droneObj);
+pause(3);
+
+%오른쪽으로 이동
+moveright(droneObj, 3);
+pause(3);
+
+%착륙
+land(droneObj);
+
+-----------------------------------------------------
+이동 지속시간 이용한 방향 제어(상하이동)
+
+%드론 객체 선언
+droneObj = ryze();
+
+%이륙
+takeoff(droneObj);
+pasue(3);
+
+%위로 이동
+moveup(droneObj, 3);
+pause(3);
+
+%아래로 이동
+movedown(droneObj, 3);
+pause(3);
+
+%착륙
+land(droneObj);
+
+-----------------------------------------------------
+이동 지속시간 이용한 방향 제어(앞뒤이동)
+
+%드론 객체 선언
+droneObj = ryze();
+
+%이륙
+takeoff(droneObj);
+pause(3);
+
+%위로 이동
+moveforward(droneObj, 3);
+pause(3);
+
+%아래로 이동
+moveback(droneObj, 3);
+pause(3);
+
+%착륙
+land(droneObj);
+
+-----------------------------------------------------
+이동 거리값 이용한 방향 제어(좌우이동)
+
+%드론 객체 선언
+droneObj = ryze();
+
+%이륙
+takeoff(droneObj);
+pause(3);
+
+%오른쪽으로 이동
+moveright(droneObj, 'distance', 0.5);
+pause(3);
+
+%왼쪽으로 이동
+moveleft(droneObj, 'distance', 0.5);
+pause(3);
+
+%착륙
+land(droneObj);
+
+-----------------------------------------------------
+이동 거리값 이용한 방향 제어(상하이동)
+
+%드론 객체 선언
+droneObj = ryze();
+
+%이륙
+takeoff(droneObj);
+pause(3);
+
+%위로 이동
+moveup(droneObj, 'distance', 0.5);
+pause(3);
+
+%아래로 이동
+movedown(droneObj, 'distance', 0.5);
+pause(3);
+
+%착륙
+land(droneObj);
+
+-----------------------------------------------------
+이동 거리값 이용한 방향 제어(앞뒤이동)
+
+%드론 객체 선언
+droneObj = ryze();
+
+%이륙
+takeoff(droneObj);
+pause(3);
+
+%앞으로 이동
+moveforward(droneObj, 'distance', 0.5);
+pause(3);
+
+%뒤로 이동
+moveback(droneObj, 'distance', 0.5);
+pause(3);
+
+%착륙
+land(droneObj);
+
+
+-----------------------------------------------------
+회전 및 방향 제어(상하이동)
+
+%드론 객체 선언
+droneObj = ryze();
+
+%이륙
+takeoff(droneObj);
+pause(3);
+
+%오른쪽으로 45도 회전
+turn(droneObj, deg2rad(45));
+pause(3);
+
+%앞으로 이동
+moveforward(droneObj, 'distance', 0.5);
+pause(3);
+
+%왼쪽으로 45도 회전
+turn(droneObj, deg2rad(-45));
+pause(3);
+
+%앞으로 이동
+moveforward(droneObj, 'distance', 0.5);
+pause(3);
+
+%착륙
+land(droneObj);
+
+

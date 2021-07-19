@@ -1,0 +1,3 @@
+numpy==1.16.2
+picamera==1.13
+e-drone==0.1.36

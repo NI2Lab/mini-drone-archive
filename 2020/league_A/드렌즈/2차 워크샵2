@@ -1,0 +1,43 @@
+예제(시연코드)
+
+cameraObj=camera(droneObj);%카메라변수
+
+preview(cameraObj) %카메라영상
+
+takeoff(droneObj);
+
+pause(3);
+
+moveup(droneObj,2);
+
+pause(3);
+
+land(droneObj);
+
+closePreview(cameraObj)
+
+시연2
+
+cameraObj=camera(droneObj);%카메라변수
+
+takeoff(droneObj);
+
+pause(3);
+
+[frame, ts] = snapshot(cameraObj);
+
+for i=1:2
+ pause(1);
+disp(ts);
+imshow(frame);
+pause(1);
+turn(droneObj, deg2rad(90));
+pause(3);
+[frame, ts] = snapshot(cameraObj);
+end
+
+pause(1);
+disp(ts);
+imshow(frame);
+pause(1);
+land(droneObj);
