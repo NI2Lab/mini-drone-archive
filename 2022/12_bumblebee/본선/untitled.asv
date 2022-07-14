@@ -1,0 +1,17 @@
+im = imread("19.jpg");
+[row, col, X] = size(im);
+    img2 = im;
+  for i = 1:row 
+        for j=1:col
+            if im(i,j,1) > 90 & im(i,j,3) > 130 & im(i,j,2)
+                img2(i,j,1) = 254;
+                img2(i,j,2) = 0;
+                img2(i,j,3) = 0;
+            else
+                img2(i,j,1) = 0;
+                img2(i,j,2) = 0;
+                img2(i,j,3) = 0;
+            end
+        end
+  end
+  imshow(img2);
