@@ -33,8 +33,9 @@
 
 #### 1-1) 원이 보이지 않는 경우
  
-><img src="https://github.com/JYJ-01/Drone/assets/167416324/01e2acef-7d31-46be-bc56-31e7f74c7d61.png" width="350" height="250"/>
-><img src="https://github.com/JYJ-01/Drone/assets/167416324/2ccf897c-2050-4319-80f1-a887008731b5.png" width="350" height="250"/>
+<img src="https://github.com/JYJ-01/Drone/assets/167416324/01e2acef-7d31-46be-bc56-31e7f74c7d61" width="350" height="250"/>
+<img src="https://github.com/JYJ-01/Drone/assets/167416324/2ccf897c-2050-4319-80f1-a887008731b5" width="350" height="250"/>
+
 >
 >위 사진과 같이 현수막의 일부만 보이는 경우, 현수막의 파란 부분을 인식한 뒤 해당 부분의 중점을 추출하여 중심점 탐색
 >
@@ -42,11 +43,13 @@
 
 #### 1-2) 원이 보이는 경우
 
-><img src="https://github.com/JYJ-01/Drone/assets/167416324/63c42038-a9bd-40e9-8902-3f73051fa7f5.png" width="350" height="250"/>
-><img src="https://github.com/JYJ-01/Drone/assets/167416324/52d26827-711d-4e54-bcc6-ae870bef90e8.png" width="350" height="250"/>
+<img src="https://github.com/JYJ-01/Drone/assets/167416324/63c42038-a9bd-40e9-8902-3f73051fa7f5" width="350" height="250"/>
+<img src="https://github.com/JYJ-01/Drone/assets/167416324/52d26827-711d-4e54-bcc6-ae870bef90e8" width="350" height="250"/>
+
 >
-><img src="https://github.com/JYJ-01/Drone/assets/167416324/71cf332d-bd5d-4a4a-83a3-74ba59a06b70.png" width="350" height="250"/>
-><img src="https://github.com/JYJ-01/Drone/assets/167416324/a212fbf8-2009-435c-b50c-2856368f3eee.png" width="350" height="250"/>
+<img src="https://github.com/JYJ-01/Drone/assets/167416324/71cf332d-bd5d-4a4a-83a3-74ba59a06b70" width="350" height="250"/>
+<img src="https://github.com/JYJ-01/Drone/assets/167416324/a212fbf8-2009-435c-b50c-2856368f3eee" width="350" height="250"/>
+
 >
 >
 >위 사진과 같이 현수막의 원의 일부라도 보이는 경우, 원의 부분을 인식한 뒤 해당 부분의 중점을 추출하여 중심점 탐색
@@ -57,13 +60,15 @@
 
 드론 카메라의 화면 중점과 찾은 중심점을 비교하여 이동할 거리 계산
 
-><img src="https://github.com/JYJ-01/Drone/assets/167416324/63c42038-a9bd-40e9-8902-3f73051fa7f5.png" width="400" height="300"/>
-><img src="https://github.com/JYJ-01/Drone/assets/167416324/2cc1e3d6-5ea4-4b87-8769-03ad82533a1f.png" width="400" height="300"/>
+<img src="https://github.com/JYJ-01/Drone/assets/167416324/63c42038-a9bd-40e9-8902-3f73051fa7f5" width="400" height="300"/>
+<img src="https://github.com/JYJ-01/Drone/assets/167416324/2cc1e3d6-5ea4-4b87-8769-03ad82533a1f" width="400" height="300"/>
+
 >
 >우측 하단으로 이동하는 경우
 
-><img src="https://github.com/JYJ-01/Drone/assets/167416324/a3ea344c-3459-4cab-b835-9eca61efc70f.png" width="400" height="300"/>
-><img src="https://github.com/JYJ-01/Drone/assets/167416324/04d949d5-c981-4057-9fad-b3d65776087f.png" width="400" height="300"/>
+<img src="https://github.com/JYJ-01/Drone/assets/167416324/a3ea344c-3459-4cab-b835-9eca61efc70f" width="400" height="300"/>
+<img src="https://github.com/JYJ-01/Drone/assets/167416324/04d949d5-c981-4057-9fad-b3d65776087f" width="400" height="300"/>
+
 >
 >좌측 상단으로 이동하는 경우
 
@@ -83,8 +88,9 @@
 >
 >촬영된 사진을 바탕으로 각 거리에 맞는 원의 직경 픽셀 값을 알 수 있었고, 해당 데이터로 회귀분석을 진행했다.
 >
-><img src="https://github.com/JYJ-01/Drone/assets/167416324/e68e076c-0e4f-4d02-82d2-1907499ae7ec" width="400" height="300"/>
-><img src="https://github.com/JYJ-01/Drone/assets/167416324/e168c86a-272a-444c-95d2-5d87c51c0656" width="400" height="300"/>
+<img src="https://github.com/JYJ-01/Drone/assets/167416324/e68e076c-0e4f-4d02-82d2-1907499ae7ec" width="400" height="300"/>
+<img src="https://github.com/JYJ-01/Drone/assets/167416324/e168c86a-272a-444c-95d2-5d87c51c0656" width="400" height="300"/>
+
 >
 >위 사진은 4단계에서 회귀분석을 위해 진행했던 촬영과정과 회귀분석으로 원의 직경 픽셀값에 따른 현수막과의 거리를 5차 다항식으로 나타낸 사진이다.
 >
@@ -99,18 +105,21 @@
 >
 >1. 빨간색 HSV 설정 
 >  
-><img src="https://github.com/JYJ-01/Drone/assets/167416324/093987a3-3889-44ac-9425-9f8cb0dca8a9.png" width="400" height="300"/>
-><img src="https://github.com/JYJ-01/Drone/assets/167416324/e7a6fe3a-66f8-4a54-a770-f7407c2a733a.png" width="400" height="300"/>
+<img src="https://github.com/JYJ-01/Drone/assets/167416324/093987a3-3889-44ac-9425-9f8cb0dca8a9" width="400" height="300"/>
+<img src="https://github.com/JYJ-01/Drone/assets/167416324/e7a6fe3a-66f8-4a54-a770-f7407c2a733a" width="400" height="300"/>
+
 >
 >2. 초록색 HSV 설정
 >
-><img src="https://github.com/JYJ-01/Drone/assets/167416324/acacd4c8-5026-48c6-bf41-a04e04e4f613" width="400" height="300"/>
-><img src="https://github.com/JYJ-01/Drone/assets/167416324/6c7f8136-ceb5-431e-a9c4-896e84b0a7f4" width="400" height="300"/>
+<img src="https://github.com/JYJ-01/Drone/assets/167416324/acacd4c8-5026-48c6-bf41-a04e04e4f613" width="400" height="300"/>
+<img src="https://github.com/JYJ-01/Drone/assets/167416324/6c7f8136-ceb5-431e-a9c4-896e84b0a7f4" width="400" height="300"/>
+
 >
 >3. 보라색 HSV 설정
 >
-><img src="https://github.com/JYJ-01/Drone/assets/167416324/00e7b634-25fb-45ed-9f70-f9bb7dd4bf4f" width="400" height="300"/>
-><img src="https://github.com/JYJ-01/Drone/assets/167416324/e553c595-e27b-4306-8845-ae24ded296a7" width="400" height="300"/>
+<img src="https://github.com/JYJ-01/Drone/assets/167416324/00e7b634-25fb-45ed-9f70-f9bb7dd4bf4f" width="400" height="300"/>
+<img src="https://github.com/JYJ-01/Drone/assets/167416324/e553c595-e27b-4306-8845-ae24ded296a7" width="400" height="300"/>
+
 >
 > 대회 맵(2,3단계)에서는 색상 표식이 현수막의 중점에 위치하도록 제어해야 한다.
 >
